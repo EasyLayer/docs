@@ -9,9 +9,10 @@ runs:
       uses: actions/cache@v3
       id: yarn-build-cache
       path: |
-          node_modules
-          .docusaurus
-        key: yarn-build-cache-${{ github.sha }}
+        node_modules
+        .docusaurus
+      key: yarn-build-cache-${{ github.sha }}
+      
     - if: ${{ steps.yarn-build-cache.outputs.cache-hit != 'true' }}
       name: 📥 Run build
       shell: bash

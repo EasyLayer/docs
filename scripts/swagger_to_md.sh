@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#
+# documentation tags: c0cc5e69-874c-471e-9635-bc706e544abf
+#
+
 # Check if a directory argument is provided
 if [ $# -eq 0 ]; then
     echo "No directory specified. Usage: $0 [SWAGGER_DIRECTORY]"

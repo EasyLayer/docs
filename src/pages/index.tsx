@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import Content from '@site/src/components/HomepageFeatures';
+import Content from '@site/src/components/HomePage';
 import Heading from '@theme/Heading';
 
 import content from './_index.content';
@@ -19,8 +19,8 @@ function HeroHeader() {
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link className="button button--secondary button--lg" to="/">
-            Docusaurus Tutorial - 5min ⏱️
+          <Link className="button button--secondary button--lg" to="/dev-docs/getting-started/intro">
+            Get Started
           </Link>
         </div>
       </div>

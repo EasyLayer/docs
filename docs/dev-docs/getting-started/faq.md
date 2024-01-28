@@ -1,6 +1,6 @@
 ---
-title: 'FAQ | EasyLayer.io Base Documentation'
+title: 'FAQ'
 sidebar: devDocs
 sidebar_label: 'FAQ'
-sidebar_position: 3
+sidebar_position: 4
 ---

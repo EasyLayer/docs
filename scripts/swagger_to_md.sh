@@ -1,28 +1,31 @@
 #!/bin/bash
 
-# Swagger source directory
-swagger_dir="swagger/"
+# Check if a directory argument is provided
+if [ $# -eq 0 ]; then
+    echo "No directory specified. Usage: $0 [SWAGGER_DIRECTORY]"
+    exit 1
+fi
 
-# Destination directory for Markdown files
-output_dir="docs/rest-api/plugins/"
+# Swagger source directory (passed as the first script argument)
+swagger_dir="$1"
 
-# Function to check if Widdershins is installed
-check_widdershins_installed() {
-    if ! command -v widdershins &> /dev/null; then
-        echo "Widdershins is not installed. Installing..."
-        npm install -g widdershins
-        if [ $? -ne 0 ]; then
-            echo "Failed to install Widdershins. Please check your npm configuration."
-            exit 1
-        fi
-    fi
-}
+# Destination directory
+output_dir="docs/rest-api/"
 
-# Check if Widdershins is installed
-check_widdershins_installed
+# Path to Widdershins executable
+widdershins="./node_modules/.bin/widdershins"
 
-# Create the destination directory if it doesn't exist
-mkdir -p "$output_dir"
+# Path to the Widdershins configuration file
+widdershins_config="widdershins-config.json"
+
+# User templates directory
+user_templates="templates"
+
+# Check if Widdershins is installed locally
+if [ ! -f "$widdershins" ]; then
+    echo "Widdershins is not installed locally. Please install it by running 'npm install widdershins --save-dev'."
+    exit 1
+fi
 
 # Loop through all .json files in the Swagger directory
 for file in "$swagger_dir"*.json; do
@@ -30,12 +33,26 @@ for file in "$swagger_dir"*.json; do
     filename=$(basename -- "$file")
     filename="${filename%.*}"
 
+    # Split filename into folderName and Version
+    IFS='_' read -ra ADDR <<< "$filename"
+    folderName="${ADDR[0]}"
+    version="${ADDR[1]}"
+
+    # Create folder if it does not exist
+    if [ ! -d "$output_dir$folderName" ]; then
+        mkdir -p "$output_dir$folderName"
+    fi
+
+    outputMarkdownFile="$output_dir$folderName/$version.md"
+
     # Generate Markdown file using Widdershins
-    if ! widdershins "$file" -o "$output_dir$filename.md"; then
+    # NOTE: Widdershins uses the -o flag (short for --outfile) to specify an output file, 
+    # and if a file with the same name already exists, it will be replaced with a new file.
+    if ! "$widdershins" "$file" --user_templates="$user_templates" --environment="$widdershins_config" --search=false --language_tabs='http:HTTP' -o "$outputMarkdownFile"; then
         echo "Error processing file $file"
         exit 1
     fi
-    echo "File $file successfully converted"
+    echo "File $file successfully converted to $outputMarkdownFile"
 done
 
 echo "All files were processed successfully"

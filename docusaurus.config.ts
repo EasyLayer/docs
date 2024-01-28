@@ -4,8 +4,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Easy Layer Documentation',
-  tagline: 'EasyLayer',
-  favicon: 'img/favicon.ico',
+  tagline: 'Base Solution',
+  favicon: 'img/favicon.ico', //TODO
 
   // Set the production url of your site here
   url: 'https://docs.easylayer.io',
@@ -15,7 +15,7 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'easylayer', // Usually your GitHub org/user name.
+  organizationName: 'EasyLayer', // Usually your GitHub org/user name.
   projectName: 'base', // Usually your repo name.
 
   onBrokenLinks: 'throw',
@@ -60,12 +60,12 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    // image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'EasyLayer Docs',
+      title: 'EasyLayer',
       logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        alt: 'EasyLayer Logo',
+        src: 'img/logo.png',
       },
       items: [
         {
@@ -74,7 +74,6 @@ const config: Config = {
           label: 'Docs', 
           position: 'left'
         },
-        // Stub Example
         {
           type: 'doc',
           docId: 'rest-api/base/intro',
@@ -82,9 +81,21 @@ const config: Config = {
           position: 'left'
         },
         {
+          type: 'doc',
+          docId: 'contribute/intro',
+          label: 'Want to contribute?',
+          position: 'left',
+        },
+        {
+          href: 'https://easylayer.io/products',
+          label: 'Request Enterprise Solution',
+          position: 'right',
+        },
+        {
           href: 'https://github.com/easylayer/',
           label: 'GitHub',
           position: 'right',
+          className: 'header-github-link',
         },
       ],
     },
@@ -95,8 +106,16 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Developer Docs',
-              to: '/',
+              label: 'Docs',
+              to: '/dev-docs/getting-started/intro',
+            },
+            {
+              label: 'REST API',
+              to: '/rest-api/core/intro',
+            },
+            {
+              label: 'Request Enterprise Solution',
+              href: 'https://easylayer.io/products',
             },
           ],
         },
@@ -104,17 +123,17 @@ const config: Config = {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'Forum',
+              href: 'https://github.com/EasyLayer/base/discussions',
             },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
-            },
+            // {
+            //   label: 'Discord',
+            //   href: 'https://discordapp.com/invite/#',
+            // },
+            // {
+            //   label: 'Twitter',
+            //   href: 'https://twitter.com/#',
+            // },
           ],
         },
         {
@@ -123,6 +142,10 @@ const config: Config = {
             {
               label: 'Blog',
               href: 'https://easylayer.io/blog/',
+            },
+            {
+              label: 'Website',
+              href: 'https://easylayer.io',
             },
             {
               label: 'GitHub',

@@ -3,5 +3,9 @@
   "compilerOptions": {
     "target": "ESNext",
     "baseUrl": "."
-  }
+  },
+  "exclude": [
+    "templates",
+    "swagger"
+  ]
 }

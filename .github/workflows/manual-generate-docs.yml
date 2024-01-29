@@ -56,7 +56,7 @@ jobs:
       - name: Build packages in base repository
         run: |
           cd ../base_repo
-          yarn build
+          yarn build:packages
 
       - name: Generate Swagger documentation in base repository
         run: |

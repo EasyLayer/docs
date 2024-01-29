@@ -3,17 +3,16 @@ description: 'Run docs build with cache enabled'
 
 runs:
   using: 'composite'
-
   steps:
     - name: ♻️ Restore build cache
       uses: actions/cache@v3
-      id: yarn-build-cache
-      path: |
-        node_modules
-        .docusaurus
-      key: yarn-build-cache-${{ github.sha }}
-      
+      with:
+        path: |
+          node_modules
+          .docusaurus
+        key: yarn-build-cache-${{ github.sha }}
+
     - if: ${{ steps.yarn-build-cache.outputs.cache-hit != 'true' }}
       name: 📥 Run build
-      shell: bash
       run: yarn build
+      shell: bash

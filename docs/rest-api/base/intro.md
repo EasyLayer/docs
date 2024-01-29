@@ -1,8 +1,6 @@
 ---
-title: 'Base REST API | EasyLayer.io Enterprise Documentation'
-sidebar: restApi
-sidebar_label: 'Base'
+title: 'Introduction Core REST API'
+sidebar: devDocs
+sidebar_label: 'Introduction'
 sidebar_position: 1
 ---
-
-# Welcome to the API EasyLayer Docs!

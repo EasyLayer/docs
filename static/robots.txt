@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /contribute/
+Sitemap: https://docs.easylayer.io/sitemap.xml

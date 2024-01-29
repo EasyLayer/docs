@@ -1,8 +1,8 @@
 ---
-title: 'Quick Start Guid'
+title: 'Configuration'
 sidebar: devDocs
-sidebar_label: 'Quick Start Guid'
-sidebar_position: 3
+sidebar_label: 'Configuration'
+sidebar_position: 4
 ---
 
 NOTE: Coming soon after the release of the first available version

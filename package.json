@@ -24,7 +24,6 @@
     "deploy": "docusaurus deploy",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "api-docs:generate-md": "widdershins swagger-spec.json --environment widdershins-config.json --search false --language_tabs 'http:HTTP' -o docs/rest-api/plugins/plugins-api.md",
     "lint": "eslint -c .eslintrc.json \"{src,apps,libs,test}/**/*.{ts,tsx,js,jsx}\"",
     "lint:fix": "eslint -c .eslintrc.json \"{src,apps,libs,test}/**/*.{ts,tsx,js,jsx}\" --fix",
     "format": "prettier -с .prettierrc.js --write \"src/**/*.ts\"",

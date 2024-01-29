@@ -111,7 +111,7 @@ const config: Config = {
             },
             {
               label: 'REST API',
-              to: '/rest-api/core/intro',
+              to: '/rest-api/base/intro',
             },
             {
               label: 'Request Enterprise Solution',

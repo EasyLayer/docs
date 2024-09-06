@@ -1,0 +1,44 @@
+<!-- Generator: Widdershins v{{=data.widdershins.version}} -->
+
+{{? data.api.components && data.api.components.securitySchemes /* Autorization */}}
+{{#def.security}}
+{{?}}
+
+{{/*
+<!-- Installation Section -->
+{{? data.api.installation }}
+{{#def.installation}}
+{{?}}
+
+<!-- Protocol Section -->
+{{? data.api.protocol }}
+{{#def.protocol}}
+{{?}}
+*/}}
+
+{{ for (var r in data.resources) /* Loop Parsing all Path & Methods */ { }}
+{{ data.resource = data.resources[r]; }}
+
+{{= data.tags.section }}
+
+{{? data.resource.description }}{{= data.resource.description}}{{?}}
+
+{{ for (var m in data.resource.methods) { }}
+{{ data.operationUniqueName = m; }}
+{{ data.method = data.resource.methods[m]; }}
+{{ data.operationUniqueSlug = data.method.slug; }}
+{{ data.operation = data.method.operation; }}
+{{= data.templates.operation(data) }}
+{{ } /* of methods */ }}
+
+{{= data.tags.endSection }}
+{{ } /* of resources */ }}
+
+<!-- Environment Variables Section -->
+{{#def.envs}}
+
+{{#def.footer}}
+
+{{? data.options.discovery}}
+{{#def.discovery}}
+{{?}}

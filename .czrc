@@ -1,0 +1,13 @@
+{
+  "path": "cz-conventional-changelog",
+  "types": {
+    "feat": {
+      "description": "A new implementation",
+      "title": "Feature"
+    },
+    "fix": {
+      "description": "A bug fix",
+      "title": "Fix"
+    }
+  }
+}

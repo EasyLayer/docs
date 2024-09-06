@@ -1,0 +1,11 @@
+.products {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.product svg {
+  height: 130px;
+  width: 130px;
+}

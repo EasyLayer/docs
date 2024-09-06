@@ -1,0 +1,20 @@
+{{= data.tags.section }}
+
+{{? data.api.protocol }}
+## Protocol
+
+### Protocol 1
+
+Describe prerequisites for the installation here.
+
+### Protocol 2
+
+Follow these steps to install the system:
+
+```bash
+npm install easylayer
+```
+
+{{?}}
+
+{{= data.tags.endSection }}

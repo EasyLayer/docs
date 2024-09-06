@@ -1,0 +1,92 @@
+#
+#  documentation tags: 0f27fa83-cc34-4067-bba6-97fe8fac5f6a
+#
+name: Manual Generate Docs
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Docs version v0.0.1 (should be Tag at the el rep)'
+        required: true
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/development'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Set up SSH key for base repository
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DOCS_PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: Clone base repository and checkout tag
+        run: |
+          git clone git@github.com:easylayer/el.git ../el_repo
+          cd ../el_repo
+          git fetch --tags
+          if git rev-parse refs/tags/${{ github.event.inputs.tag }} >/dev/null 2>&1; then
+              git checkout tags/${{ github.event.inputs.tag }}
+          else
+              echo "Tag ${{ github.event.inputs.tag }} does not exist"
+              exit 1
+          fi
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Install dependencies in base repository
+        run: |
+          cd ../el_repo
+          yarn install
+
+      - name: Build packages in base repository
+        run: |
+          cd ../el_repo
+          yarn build:prod
+
+      - name: Generate Swagger documentation in el repository
+        run: |
+          cd ../el_repo
+          yarn generate-api-docs $(pwd)
+      
+      - name: Generate Envs documentation in el repository
+        run: |
+          cd ../el_repo
+          yarn generate-config-docs $(pwd)
+
+      - name: Install dependencies in current repository
+        uses: ./.github/actions/yarn-nm-install
+
+      - name: Prepare Swagger documentation from Api Docs & Config Docs
+        run: ./scripts/prepare_swagger.sh ../el_repo/api-docs/ ../el_repo/config-docs/
+
+      - name: Generate Markdown documentation from Swagger JSON
+        run: ./scripts/swagger_to_md.sh
+
+      - name: Build the current project
+        uses: ./.github/actions/run-build
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'Your Name'
+          git config --global user.email 'your-email@example.com'
+          git add -A
+          git commit -m "Generate version ${{ github.event.inputs.tag }}"
+          git push

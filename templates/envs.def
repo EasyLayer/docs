@@ -1,0 +1,16 @@
+{{= data.tags.section }}
+
+{{? data.api.envs }}
+## Environment Variables
+
+{{ for (var envGroup in data.api.envs) { }}
+### {{= envGroup }}
+| Variable | Type    | Description              | Default Value |
+|----------|---------|--------------------------|---------------|
+{{ for (var propertyKey in data.api.envs[envGroup]) { }}| {{= propertyKey }} | {{= data.api.envs[envGroup][propertyKey].type || 'unknown' }} | {{= data.api.envs[envGroup][propertyKey].description || 'No description provided' }} | {{= data.api.envs[envGroup][propertyKey].default || 'None' }} |
+{{ } }}
+{{ } }}
+
+{{?}}
+
+{{= data.tags.endSection }}

@@ -1,0 +1,10 @@
+{
+    "resolve": false,
+    "headings": 2,
+    "httpsnippet": false,
+    "expandBody": true,
+    "summary": false,
+    "language_tabs": [
+        {"javascript--node": "Node.JS" }
+    ]
+}

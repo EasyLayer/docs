@@ -1,0 +1,30 @@
+{{= data.tags.section }}
+
+{{? data.api.installation }}
+## Installation
+
+Please make sure that [Node.js](https://nodejs.org/) (version >= 16) is installed on your operating system.
+
+### Install
+
+With [npm](https://www.npmjs.com) installed, you can create a new Bitcoin Loader with the following command in your OS terminal:
+```bash
+npm install @el/
+```
+
+### Setup
+
+**Filename: MyClass.ts**
+
+```tsx title="index.ts"
+class MyClass {
+    constructor(private name: string) {}
+
+    greet() {
+        return `Hello, ${this.name}!`;
+    }
+}
+```
+
+{{?}}
+{{= data.tags.endSection }}

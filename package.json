@@ -1,0 +1,79 @@
+{
+  "name": "@el/docs",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Yaroslav Pavliuk",
+  "packageManager": "yarn@3.6.0",
+  "license": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/easylayer/docs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/easylayer/docs/issues"
+  },
+  "homepage": "https://github.com/easylayer/docs#readme",
+  "scripts": {
+    "clear": "yarn run clear:dist && yarn run clear:node_modules && yarn clean cache",
+    "clear:node_modules": "rimraf node_modules",
+    "clear:dist": "docusaurus clear",
+    "start:dev": "docusaurus start",
+    "start": "docusaurus serve",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "lint": "eslint -c .eslintrc.json \"{src,apps,libs,test}/**/*.{ts,tsx,js,jsx}\"",
+    "lint:fix": "eslint -c .eslintrc.json \"{src,apps,libs,test}/**/*.{ts,tsx,js,jsx}\" --fix",
+    "format": "prettier -с .prettierrc.js --write \"src/**/*.ts\"",
+    "postinstall": "husky install",
+    "pre-commit": "yarn run lint",
+    "pre-push": "",
+    "commit": "cz"
+  },
+  "dependencies": {
+    "@docusaurus/core": "3.0.0",
+    "@docusaurus/preset-classic": "3.0.0",
+    "@mdx-js/react": "3.0.0",
+    "clsx": "1.2.1",
+    "prism-react-renderer": "2.1.0",
+    "react": "18.0.0",
+    "react-dom": "18.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "18.4.3",
+    "@commitlint/config-conventional": "18.4.3",
+    "@docusaurus/module-type-aliases": "3.0.0",
+    "@docusaurus/tsconfig": "3.0.0",
+    "@docusaurus/types": "3.0.0",
+    "@typescript-eslint/eslint-plugin": "6.13.2",
+    "@typescript-eslint/parser": "6.13.2",
+    "commitizen": "4.3.0",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "8.55.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-prettier": "5.0.1",
+    "husky": "8.0.3",
+    "prettier": "3.1.1",
+    "rimraf": "5.0.5",
+    "typescript": "5.2.2",
+    "widdershins": "4.0.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 3 chrome version",
+      "last 3 firefox version",
+      "last 5 safari version"
+    ]
+  },
+  "devEngines": {
+    "node": ">=18.0.0 <=20.x.x",
+    "npm": ">=8.0.0"
+  }
+}

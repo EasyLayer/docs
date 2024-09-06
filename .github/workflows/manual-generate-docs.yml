@@ -29,14 +29,14 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Set up SSH key for base repository
+      - name: Set up SSH key for el repository
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.DOCS_PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-      - name: Clone base repository and checkout tag
+      - name: Clone el repository and checkout tag
         run: |
           git clone git@github.com:easylayer/el.git ../el_repo
           cd ../el_repo
@@ -51,12 +51,12 @@ jobs:
       - name: Install jq
         run: sudo apt-get install -y jq
 
-      - name: Install dependencies in base repository
+      - name: Install dependencies in el repository
         run: |
           cd ../el_repo
           yarn install
 
-      - name: Build packages in base repository
+      - name: Build packages in el repository
         run: |
           cd ../el_repo
           yarn build:prod
@@ -75,7 +75,7 @@ jobs:
         uses: ./.github/actions/yarn-nm-install
 
       - name: Prepare Swagger documentation from Api Docs & Config Docs
-        run: ./scripts/prepare_swagger.sh ../el_repo/api-docs/ ../el_repo/config-docs/
+        run: ./scripts/prepare_swagger.sh ../el_repo/api-docs/ ../el_repo/config-docs/ ./swagger/
 
       - name: Generate Markdown documentation from Swagger JSON
         run: ./scripts/swagger_to_md.sh

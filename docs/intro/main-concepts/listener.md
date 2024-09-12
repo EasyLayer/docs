@@ -35,7 +35,7 @@ The Mapper processes each event and ensures that appropriate actions are taken b
 Here’s an example of defining an event model:
 
 ```typescript
-import { BaseViewModel } from '@el/bitcoin-listener';
+import { BaseViewModel } from '@easylayer/bitcoin-listener';
 
 export class BlockEvent implements BaseViewModel {
   type: string = 'newblock';
@@ -59,7 +59,7 @@ export class TransactionEvent implements BaseViewModel {
 The Mapper defines how to process events and manage blockchain reorganization (reorg). Here’s an example of an event Mapper:
 
 ```typescript
-import { IListenerMapper, BaseViewModel } from '@el/bitcoin-listener';
+import { IListenerMapper, BaseViewModel } from '@easylayer/bitcoin-listener';
 import { BlockEvent, TransactionEvent } from './events';
 
 export class EventsMapper implements IListenerMapper {

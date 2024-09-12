@@ -41,7 +41,7 @@ Loader leverages a **custom protocol** that allows developers to fully customize
 Here’s a sample example for generating a model from a schema:
 
 ```typescript
-import { EntitySchema, generateModelFromSchema } from '@el/bitcoin-loader';
+import { EntitySchema, generateModelFromSchema } from '@easylayer/bitcoin-loader';
 
 export const BlockSchema = new EntitySchema({
   name: 'blocks',

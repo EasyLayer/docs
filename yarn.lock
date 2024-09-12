@@ -2436,9 +2436,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@el/docs@workspace:.":
+"@easylayer/docs@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@el/docs@workspace:."
+  resolution: "@easylayer/docs@workspace:."
   dependencies:
     "@commitlint/cli": 18.4.3
     "@commitlint/config-conventional": 18.4.3

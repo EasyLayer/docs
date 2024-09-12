@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#
+# documentation tags: c0cc5e69-874c-471e-9635-bc706e544abf
+#
+
 # Check if at least two arguments (API_DOCS_DIR and CONFIG_DOCS_DIR) are provided
 if [[ $# -lt 2 ]]; then
   echo "Usage: $0 <API_DOCS_DIR> <CONFIG_DOCS_DIR> [OUTPUT_DIR]"

@@ -40,7 +40,7 @@ We provide a **custom schema generator** specifically for key-value stores, whic
 Here's an example of how to generate a model from a schema:
 
 ```typescript
-import { Schema, generateModelFromSchema } from '@el/bitcoin-indexer';
+import { Schema, generateModelFromSchema } from '@easylayer/bitcoin-indexer';
 
 export const OutputSchema = new Schema({
   prefix: 'output',
@@ -70,8 +70,8 @@ export const OutputModel = generateModelFromSchema(OutputSchema);
 The Mapper is optimized for key-value data management. Here’s an example of a basic Mapper for Indexer:
 
 ```typescript
-import { IIndexerMapper } from '@el/bitcoin-indexer';
-import { Currency, Money } from '@el/common/arithmetic';
+import { IIndexerMapper } from '@easylayer/bitcoin-indexer';
+import { Currency, Money } from '@easylayer/common/arithmetic';
 import { OutputModel } from './models';
 
 export class Mapper implements IIndexerMapper {

@@ -48,8 +48,8 @@ const ProductsList = [
     description: (
       <>
         <Link to="/intro/main-concepts/wallet">Wallet</Link> is a ready-to-use cryptocurrency wallet with an encrypted
-        storage system, allowing you to manage multiple keys and create and send transactions. It provides a REST API
-        for easy integration and interaction.
+        storage system, allowing you to manage multiple keys and create and send transactions. It provides a RPC API for
+        easy integration and interaction.
       </>
     ),
   },

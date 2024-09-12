@@ -9,7 +9,7 @@ Please make sure that [Node.js](https://nodejs.org/) (version >= 16) is installe
 
 With [npm](https://www.npmjs.com) installed, you can create a new Bitcoin Loader with the following command in your OS terminal:
 ```bash
-npm install @el/
+npm install @easylayer/
 ```
 
 ### Setup

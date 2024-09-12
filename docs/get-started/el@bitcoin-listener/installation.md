@@ -19,13 +19,13 @@ Please make sure that [Node.js](https://nodejs.org/) (version >= 16) is installe
 
 With [npm](https://www.npmjs.com) installed, you can create a new Bitcoin Listener with the following command in your OS terminal:
 ```bash
-npm install @el/bitcoin-listener
+npm install @easylayer/bitcoin-listener
 ```
 
-The [@el/bitcoin-listener](https://www.npmjs.com/easylayer.io) exports an async function, which will **bootstrap** the listener:
+The [@easylayer/bitcoin-listener](https://www.npmjs.com/easylayer.io) exports an async function, which will **bootstrap** the listener:
 
 ```tsx title="main.ts"
-import { bootstrap } from '@el/bitcoin-listener';
+import { bootstrap } from '@easylayer/bitcoin-listener';
 import { EventsMapper } from './mapper';
 
 bootstrap({

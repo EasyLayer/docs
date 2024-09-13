@@ -5,8 +5,6 @@ sidebar_label: 'Loader'
 sidebar_position: 1
 ---
 
-TODO: add loader schema
-
 ### Overview
 
 **Loader** is designed to load blockchain data into a relational database for subsequent reading and analysis. It is optimized to handle large volumes of data, enabling developers to load entire blockchains if necessary. The developer retains full control over what data to store and how it is related. Currently, Loader supports databases such as [SQLite](https://sqlite.org), [PostgreSQL](https://www.postgresql.org), and [MySQL](https://www.mysql.com), with the ability for developers to specify their preferred database for loading the data.
@@ -15,6 +13,7 @@ Developers can configure Loader to pull data by blocks and load the relevant inf
 
 Loader integrates with both self-hosted nodes and third-party providers such as [QuickNode](https://www.quicknode.com), giving flexibility in how data is sourced.
 
+![Loader Concept Diagram](/img/loader_concept_diagram.svg)
 ### How It Works
 
 The Loader system allows developers to define the specific blockchain data they want to store and the relationships between that data. It works by connecting to a blockchain node, retrieving blocks or transactions, and saving that information to a relational database according to the developer’s configuration. 

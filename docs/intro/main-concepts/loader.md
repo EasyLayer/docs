@@ -77,7 +77,7 @@ Developers also need to define a Mapper, which determines how to handle block da
 
 ```typescript
 export class BlocksMapper implements ILoaderMapper {
-  public async load(block: Block) {
+  public async onLoad(block: Block) {
     // Handle block data, save to the database using the generated models
 
     const { height, hash, previousblockhash, tx } = block;
@@ -94,7 +94,7 @@ export class BlocksMapper implements ILoaderMapper {
     return model;
   }
 
-  public async reorganisation(blocks: Block[]) {
+  public async onReorganisation(lightBlock: LightBlock) {
     // Manage blockchain reorg, update database records
   }
 }

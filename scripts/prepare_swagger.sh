@@ -4,16 +4,16 @@
 # documentation tags: c0cc5e69-874c-471e-9635-bc706e544abf
 #
 
+# Directories for OpenAPI and configuration files
+API_DOCS_DIR=${1:-"api-docs"}  # Directory for OpenAPI documents (default: "api-docs")
+CONFIG_DOCS_DIR=${2:-"config-docs"}  # Directory for configuration documents (default: "config-docs")
+OUTPUT_DIR=${3:-"swagger"}  # Directory for saving output (default: "swagger")
+
 # Check if at least two arguments (API_DOCS_DIR and CONFIG_DOCS_DIR) are provided
 if [[ $# -lt 2 ]]; then
   echo "Usage: $0 <API_DOCS_DIR> <CONFIG_DOCS_DIR> [OUTPUT_DIR]"
   exit 1
 fi
-
-# Directories for OpenAPI and configuration files
-API_DOCS_DIR=${1:-"api-docs"}  # Directory for OpenAPI documents (default: "api-docs")
-CONFIG_DOCS_DIR=${2:-"config-docs"}  # Directory for configuration documents (default: "config-docs")
-OUTPUT_DIR=${3:-"swagger"}  # Directory for saving output (default: "swagger")
 
 # Key to use for the envs object in OpenAPI files
 ENVS_KEY="envs"  # Default key name for envs object

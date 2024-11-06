@@ -7,9 +7,9 @@ sidebar_position: 1
 
 ### Overview
 
-**Loader** is designed to load blockchain data into a relational database for subsequent reading and analysis. It is optimized to handle large volumes of data, enabling developers to load entire blockchains if necessary. The developer retains full control over what data to store and how it is related. Currently, Loader supports databases such as [SQLite](https://sqlite.org), [PostgreSQL](https://www.postgresql.org), and [MySQL](https://www.mysql.com), with the ability for developers to specify their preferred database for loading the data.
+**Loader** is designed to load blockchain data into a relational database for subsequent reading and analysis. It is optimized to handle large volumes of data, enabling developers to load entire blockchains if necessary. The developer retains full control over what data to store and how it is related. Currently, Loader supports databases such as [SQLite](https://sqlite.org) and [PostgreSQL](https://www.postgresql.org), with the ability for developers to specify their preferred database for loading the data.
 
-Developers can configure Loader to pull data by blocks and load the relevant information into their database.
+Developers can configure the Loader to extract data by blocks and load the relevant information into their chosen database schema.
 
 Loader integrates with both self-hosted nodes and third-party providers such as [QuickNode](https://www.quicknode.com), giving flexibility in how data is sourced.
 
@@ -24,23 +24,44 @@ In essence, developers specify:
 - The **data schema** (the structure of the data)
 - The **database** where data will be stored
 
+### Key Features
+
+- **Self-Hosted Application**: Developers deploy and manage it themselves.
+- **Flexible Connectivity**: Works with both your own blockchain node and custom providers like Quicknode.
+- **Block Range Flexibility**: Can be started at any blockchain height range and supports real-time mode with automatic blockchain reorganization.
+- **Schema Flexibility**: Developers can configure the Loader to extract data by blocks and load the relevant information into their chosen database schema.
+- **Database Compatibility**: Supports SQLite and PostgreSQL.
+- **Configuration Management**: Managed and configured using environment variables.
+- **REST API Server**: Includes a ready-to-use REST API server for accessing loaded data.
+------------
+- **Example applications** based on the loader are available in the `examples` folder at the root of the `el` repository.
+- Uses **Node.js** as the engine (version 18 or higher is important).
+
 ### Performance
 
-Loader is designed to operate at high speeds, but actual performance depends on the network latency of fetching blocks from the blockchain and how efficiently data is inserted into the database. Most of the time, performance bottlenecks are related to network delays and database insertions. Running Loader alongside a self-hosted node can significantly reduce network latency, making data loading faster.
+Loader is engineered for high-speed operation, but actual performance is primarily influenced by two factors: network latency when fetching blocks from the blockchain and the efficiency of inserting large datasets into your SQL database, depending on your chosen schema structure.
 
-Loader is optimized for **high-volume data insertion**, so developers need to ensure that their database infrastructure is properly tuned for high-speed writes. Because the developer has full control over the database, the responsibility of optimizing database performance lies with them. Proper indexing and database tuning can greatly enhance the performance of data loading.
+In 99% of cases, performance bottlenecks arise from either network delays or database insertion speeds. To mitigate network latency, developers can increase the number of parallel requests to the node or provider and adjust the size of data transmitted per request through configuration parameters. Additionally, optimizing node settings can further reduce network delays.
+
+When it comes to the database, performance tuning becomes more intricate. Database performance is multifaceted, depending on the complexity of your database schema, the presence of indexes, and the defined relationships. Loader is optimized for high-volume data insertion through several software-level optimizations:
+
+- **UNLOGGED Databases**: Enabled by default to accelerate insertion speeds, with the option to disable if necessary.
+- **COPY for Streaming Inserts**: Utilizes the COPY command for efficient, high-throughput data streaming.
+- **Batch Transactions**: Executes a large number of inserts within a single transaction to minimize overhead and enhance performance.
+
+Developers should ensure their database infrastructure is properly configured for high-speed writes. For complex data schemas or when loading the entire blockchain, it is recommended to initially load data without indexes and relationships to achieve faster loading times. Once the blockchain height is reached, developers can then create the necessary indexes and relationships separately and restart Loader to apply these schema optimizations.
 
 ### Protocol
 
-Loader leverages a **custom protocol** that allows developers to fully customize the data they want to manage. The protocol provides flexibility in defining the data schemas and models. These schemas describe the entities and their relationships, and models are generated from these schemas.
+Loader leverages a **custom protocol** that allows developers to fully customize the data they want to manage. The protocol provides flexibility in defining the data schemas and models. These schemas describe the entities and their relationships, and repositories are generated from these schemas.
 
 - [TypeORM](https://typeorm.io) is used under the hood for schema generation, which means developers can take full advantage of TypeORM’s features. Developers can refer to TypeORM’s documentation for advanced schema and model configurations.
-- The Loader package automatically generates models based on the schema defined by the developer, which are then used in functions that load and process blockchain data.
+- The Loader package automatically generates repositories based on the schema defined by the developer, which are then used in functions that load and process blockchain data.
 
-Here’s a sample example for generating a model from a schema:
+Here’s a sample example for generating a repository from a schema:
 
 ```typescript
-import { EntitySchema, generateModelFromSchema } from '@easylayer/bitcoin-loader';
+import { EntitySchema, generateRepositoryFromSchema } from '@easylayer/bitcoin-loader';
 
 export const BlockSchema = new EntitySchema({
   name: 'blocks',
@@ -53,49 +74,49 @@ export const BlockSchema = new EntitySchema({
     height: {
       type: 'integer',
     },
-    previousblockhash: {
-      type: 'varchar',
-      nullable: true,
+    is_suspended: {
+      type: 'boolean',
+      default: false,
     },
     tx: {
       type: 'json',
       nullable: false,
     },
   },
-  uniques: [
-    {
-      name: 'UQ__blocks__hash',
-      columns: ['hash'],
-    },
-  ],
 });
 
-export const BlockModel = generateModelFromSchema(BlockSchema);
+export const BlocksRepository = generateRepositoryFromSchema(BlockSchema);
 ```
 
-Developers also need to define a Mapper, which determines how to handle block data and any necessary reorganization (reorg) of blockchain data. Here’s a sample Mapper:
+Developers also need to define a Mapper, which determines how to handle block data and any necessary reorganization of blockchain data. Here’s a sample Mapper:
 
 ```typescript
-export class BlocksMapper implements ILoaderMapper {
-  public async onLoad(block: Block) {
-    // Handle block data, save to the database using the generated models
+import { ILoaderMapper } from '@easylayer/bitcoin-loader';
+import { BlocksRepository } from './blocks';
 
+export class BlocksMapper implements ILoaderMapper {
+  public async onLoad(block: any) {
     const { height, hash, previousblockhash, tx } = block;
 
-    const model = new BlockModel();
+    const repo = new BlocksRepository();
 
-    await model.insert({
+    repo.insert({
       hash, 
-      height,
-      previousblockhash,
-      tx: tx.map((t: Transaction) => t.txid)
+      height: Number(height),
+      tx: tx.map((t: any) => t.txid),
     });
 
-    return model;
+    return repo;
   }
 
-  public async onReorganisation(lightBlock: LightBlock) {
-    // Manage blockchain reorg, update database records
+  public async onReorganisation(lightBlock: any) {
+    const { hash } = lightBlock;
+
+    const repo = new BlocksRepository();
+
+    repo.update({ hash }, { is_suspended: true });
+
+    return repo;
   }
 }
 ```

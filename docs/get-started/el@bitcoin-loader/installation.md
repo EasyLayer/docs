@@ -13,11 +13,13 @@ sidebar_position: 1
 
 ---
 
-Please make sure that [Node.js](https://nodejs.org/) (version >= 16) is installed on your operating system.
+**Disclaimer**. Please note that the current version of the **Bitcoin Loader** is experimental. We do not recommend using it in production environments at this time. Our team is actively developing, testing, and improving the product daily to enhance its reliability and performance. We appreciate your understanding and encourage you to provide feedback as we continue to refine the Bitcoin Loader.
 
 ### Setup
 
-With [npm](https://www.npmjs.com) installed, you can create a new Bitcoin Loader with the following command in your OS terminal:
+Please make sure that [Node.js](https://nodejs.org/) (version >= 18) is installed on your operating system.
+
+With [npm](https://www.npmjs.com) installed, you can create a new **Bitcoin Loader** with the following command in your OS terminal:
 ```bash
 npm install @easylayer/bitcoin-loader
 ```

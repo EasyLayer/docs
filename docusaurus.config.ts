@@ -4,8 +4,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'EasyLayer.io',
-  tagline: 'Self hosted tools for integration crypto processing into your business',
-  favicon: 'img/favicon.ico', //TODO
+  tagline: 'Self hosted tools for tntegrating crypto processing and data indexing into your business',
+  favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
   url: 'https://docs.easylayer.io',
@@ -28,6 +28,27 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/img/favicon-32x32.png',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/img/favicon-16x16.png',
+      },
+    },
+  ],
 
   presets: [
     [

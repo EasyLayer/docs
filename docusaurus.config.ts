@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'EasyLayer.io',
-  tagline: 'Self hosted tools for tntegrating crypto processing and data indexing into your business',
+  tagline: 'Self hosted tools for integrating crypto processing and data indexing into your business',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here

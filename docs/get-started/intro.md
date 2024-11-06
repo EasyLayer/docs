@@ -5,7 +5,7 @@ sidebar_label: 'Overview'
 sidebar_position: 1
 ---
 
-In this section, you will find detailed information about our tool packages. Below is a list of available packages with links to their respective documentation. These packages work with [Node.js](https://nodejs.org/) version 16 or higher and can be downloaded using either [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/).
+In this section, you will find detailed information about our tool packages. Below is a list of available packages with links to their respective documentation. These packages work with [Node.js](https://nodejs.org/) version 18 or higher and can be downloaded using either [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/).
 
 - **Bitcoin Loader** - [Documentation](/docs/get-started/el@bitcoin-loader/installation.md)
 - **Bitcoin Indexer** - [Documentation](/docs/get-started/el@bitcoin-indexer/installation.md)
